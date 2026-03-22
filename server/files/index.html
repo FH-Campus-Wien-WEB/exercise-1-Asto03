@@ -18,8 +18,34 @@
             xhr.onload = function () {
                 const bodyElement = document.querySelector("body")
                 if (xhr.status == 200) {
-		            /* Part 2: Build the HTML elements here and append them to the body */ 
-                    bodyElement.append(reverseString(xhr.responseText))
+		            /* Part 2: Build the HTML elements here and append them to the body */
+//                    bodyElement.append(String(xhr.responseText))
+                    const movies = JSON.parse(xhr.responseText)
+                    //JS version of for each
+                    movies.forEach((movie) => {
+                        //create HTML Element for each movie
+                       const movieObject = document.createElement("div");
+                       //innerHTML = HTML inside of a function
+                        movieObject.innerHTML = `
+                        <img src="${movie.Poster}" alt="${movie.Title}">
+                        <h2>${movie.Title}</h2>
+                        <p>${movie.Released}</p>
+                        <p>${movie.Runtime}</p>
+                        <p>${movie.Genres}</p>
+                        <p>${movie.Directors}</p>
+                        <p>${movie.Writers}</p>
+                        <p>${movie.Actors}</p>
+                        <p>${movie.Plot}</p>
+                        <p>${movie.Metascore}</p>
+                        <p>${movie.imdbRating}</p>
+
+
+                        `;
+
+                        bodyElement.append(movieObject);
+                    })
+
+
                 } else {
                     bodyElement.append("Daten konnten nicht geladen werden, Status " + xhr.status + " - " + xhr.statusText)
                 }
