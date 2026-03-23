@@ -6,7 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies!</title>
     <style>
-        /* Part 3: Your styling goes here */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: lightgray;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            }
+        .movie-card{
+            width: calc(25% - 10px);
+            margin: 10px;
+            text-align: center;
+        }
+        .movie-card img{
+            max-width: 100%;
+            height: auto;
+        }
     </style>
     <script>
         function reverseString(s) {
@@ -25,21 +42,27 @@
                     movies.forEach((movie) => {
                         //create HTML Element for each movie
                        const movieObject = document.createElement("div");
+                       movieObject.classList.add('movie-card'); //for css
+                       const runtime_hour = Math.floor(movie.Runtime/60)
+                        const runtime_minute = movie.Runtime % 60
                        //innerHTML = HTML inside of a function
                         movieObject.innerHTML = `
                         <img src="${movie.Poster}" alt="${movie.Title}">
-                        <h2>${movie.Title}</h2>
-                        <p>${movie.Released}</p>
-                        <p>${movie.Runtime}</p>
-                        <p>${movie.Genres}</p>
-                        <p>${movie.Directors}</p>
-                        <p>${movie.Writers}</p>
-                        <p>${movie.Actors}</p>
-                        <p>${movie.Plot}</p>
-                        <p>${movie.Metascore}</p>
-                        <p>${movie.imdbRating}</p>
-
-
+                        <h1>${movie.Title}</h1>
+                            <p>Released on ${movie.Released}</p>
+                            <p>Runtime: ${runtime_hour}h ${runtime_minute}min</p>
+                            <p>Genres: ${movie.Genres.map(e => `<p>${e}</p>`).join('')}</p>
+                            <p>${movie.Plot}</p>
+                        <h2>${movie.Directors.length > 1 ? 'Directors' : 'Director'}</h2>
+                            <p>${movie.Directors.map(e => `<p>${e}</p>`).join('')}</p>
+                        <h2>${movie.Writers.length > 1 ? 'Writers' : 'Writer'}</h2>
+                            <p>${movie.Writers.map(e => `<p>${e}</p>`).join('')}</p>
+                        <h2>${movie.Actors.length > 1 ? 'Actors' : 'Actor'}</h2>
+                            <p>${movie.Actors.map(e => `<p>${e}</p>`).join('')}</p>
+                        <h2>Ratings</h2>
+                            <p>Metascore: ${movie.Metascore}</p>
+                            <p>IMDb: ${movie.imdbRating}</p>
+                        <hr>
                         `;
 
                         bodyElement.append(movieObject);
