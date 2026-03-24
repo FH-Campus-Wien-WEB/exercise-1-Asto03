@@ -12,7 +12,7 @@ app.get('/movies', function (req, res) {
   const movies =[
     {
       "Title": "Spirited Away",
-      "Released": "28/03/2003",
+      "Released": "2003-03-28",
       "Runtime": 124,
       "Genres": ["Animation", "Adventure", "Family"],
       "Directors": ["Hayao Miyazaki"],
@@ -25,7 +25,7 @@ app.get('/movies', function (req, res) {
     },
     {
       "Title": "The Truman Show",
-      "Released": "05/06/1998",
+      "Released": "1998-06-05",
       "Runtime": 103,
       "Genres": ["Comedy", "Drama"],
       "Directors": ["Peter Weir"],
@@ -38,7 +38,7 @@ app.get('/movies', function (req, res) {
     },
     {
       "Title": "Dragon Ball Super: Broly",
-      "Released": "16/01/2019",
+      "Released": "2019-01-16",
       "Runtime": 100,
       "Genres": ["Animation", "Action", "Adventure"],
       "Directors": ["Tatsuya Nagamine"],
@@ -48,6 +48,32 @@ app.get('/movies', function (req, res) {
       "Poster": "https://m.media-amazon.com/images/M/MV5BMTA5MTc1M2EtZWQ2Ni00ZmU2LTg3MzQtOTliMjE4OGM0ZWFiXkEyXkFqcGc@._V1_SX300.jpg",
       "Metascore": 59,
       "imdbRating": 7.7
+    },
+    {
+      "Title": "Princess Mononoke",
+      "Released": "1997-07-12",
+      "Runtime": 133,
+      "Genres": ["Animation", "Adventure", "Fantasy"],
+      "Directors": ["Hayao Miyazaki"],
+      "Writers": ["Hayao Miyazaki"],
+      "Actors": ["Yôji Matsuda", "Yuriko Ishida", "Yûko Tanaka"],
+      "Plot": "While seeking to cure himself of a curse, young warrior Ashitaka stumbles into a conflict between the people of Iron Town and Princess Mononoke, a girl raised by wolves, who will stop at nothing to prevent the destruction of her h...",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BNjAzODViNGEtMjBkYi00N2U5LWJjNjAtY2U0MGJhZTEwOTU0XkEyXkFqcGc@._V1_SX300.jpg",
+      "Metascore": 78,
+      "imdbRating": 8.3
+    },
+    {
+      "Title":"American Psycho",
+      "Released":"2000-04-14",
+      "Runtime": 102,
+      "Genres": ["Crime", "Drama", "Horror"],
+      "Directors": ["Mary Harron"],
+      "Writers": ["Bret Easton Ellis", "Mary Harron", "Guinevere Turner"],
+      "Actors": ["Christian Bale", "Justin Theroux", "Josh Lucas"],
+      "Plot": "A wealthy New York City investment banking executive, Patrick Bateman, hides his alternate psychopathic ego from his co-workers and friends as he delves deeper into his violent, hedonistic fantasies.",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BNzBjM2I5ZjUtNmIzNy00OGNkLWIwZDMtOTAwYWUwMzA2YjdlXkEyXkFqcGc@._V1_SX300.jpg",
+      "Metascore": 64,
+      "imdbRating": 7.6
     }
   ]
   res.send(movies);

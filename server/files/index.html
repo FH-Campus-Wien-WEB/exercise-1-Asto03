@@ -7,23 +7,103 @@
     <title>Movies!</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: lightgray;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            }
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Windows: Segoe UI, Android: Roboto, macOS: Helvetica/Arial, any: sans-serif */
+            background-color: #560319;
+            color: white;
+            margin: 0;                      /* distance between outside the border (Container) */
+            padding: 2.5rem 1.25rem;        /* distance between Elements and border */
+            display: flex;                  /* enables flex options */
+            flex-direction: row;            /* How Cards are positioned */
+            flex-wrap: wrap;                /* "Line breaks" */
+            justify-content: center;        /* Centers cards */
+            gap: 20px;                      /* Gaps between cards */
+        }
         .movie-card{
-            width: calc(25% - 10px);
+            background-color: #1f1f1f;
+            width: 300px;                   /* Card width */
+            border-radius: 12px;            /* Round corners */
+            overflow: hidden;               /* Everything that is to big for the card gets choped off */
             margin: 10px;
             text-align: center;
+            padding-bottom: 20px;
+            transition: all 0.2s ease;       /* hover effect */
+        }
+        .movie-card:hover{
+            transform: translateY(-5px);      /* by how many pixels the cards move when hovering over them */
+            box-shadow: 0 15px 40px black;    /* 0 -> X-axis, 15 -> Y-axis, 40 -> blur radius */
         }
         .movie-card img{
-            max-width: 100%;
-            height: auto;
+            max-width: 100%;                   /* max-width prevents overflow */
+            height: 450px;
+            object-fit: cover;
+            border-bottom: 3px solid red;      /* red line under img */
         }
+        .movie-card h1 {
+            font-size: 1.5rem;
+            margin: 1rem;
+        }
+        .movie-card h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06rem;
+            border-bottom: 2px solid #808080;
+            color: grey;
+            padding: 0.5rem;
+        }
+        .movie-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0.5rem 1rem;
+            color: #d3d3d3;
+        }
+        .genres-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px;
+        }
+        .genres-tags {
+            background-color: #800000;
+            color: #d3d3d3;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1.25rem;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.2s ease;          /* how long until hover appears and leaves */
+            cursor: default;
+        }
+        .actors-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+        }
+        .writers-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+        }
+        .directors-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+        }
+        .
+        .genres-tags:hover {
+            background-color: #700000;
+            border-color: #700000;
+        }
+        .plot-container {
+            border-left: 1px solid yellow;
+            padding: 10px;
+        }
+
     </style>
     <script>
         function reverseString(s) {
@@ -41,28 +121,43 @@
                     //JS version of for each
                     movies.forEach((movie) => {
                         //create HTML Element for each movie
-                       const movieObject = document.createElement("div");
+                        //"main" Element
+                       const movieObject = document.createElement("article");
                        movieObject.classList.add('movie-card'); //for css
+
+                        //Runtime hours and minutes
                        const runtime_hour = Math.floor(movie.Runtime/60)
                         const runtime_minute = movie.Runtime % 60
+
+
                        //innerHTML = HTML inside of a function
                         movieObject.innerHTML = `
                         <img src="${movie.Poster}" alt="${movie.Title}">
                         <h1>${movie.Title}</h1>
                             <p>Released on ${movie.Released}</p>
                             <p>Runtime: ${runtime_hour}h ${runtime_minute}min</p>
-                            <p>Genres: ${movie.Genres.map(e => `<p>${e}</p>`).join('')}</p>
-                            <p>${movie.Plot}</p>
+                            <div class="genres-container">
+                                ${movie.Genres.map(e => `<span class="genres-tags">${e}</span>`).join('')}
+                            </div>
+                        <h2>Plot</h2>
+                            <div class="plot-container">
+                                <i>${movie.Plot}</i>
+                            </div>
                         <h2>${movie.Directors.length > 1 ? 'Directors' : 'Director'}</h2>
-                            <p>${movie.Directors.map(e => `<p>${e}</p>`).join('')}</p>
+                            <div class="directors-container">
+                                ${movie.Directors.map(e => `<span>${e}</span>`).join('')}
+                            </div>
                         <h2>${movie.Writers.length > 1 ? 'Writers' : 'Writer'}</h2>
-                            <p>${movie.Writers.map(e => `<p>${e}</p>`).join('')}</p>
+                            <div class="writers-container">
+                                ${movie.Writers.map(e => `<span>${e}</span>`).join('')}
+                            </div>
                         <h2>${movie.Actors.length > 1 ? 'Actors' : 'Actor'}</h2>
-                            <p>${movie.Actors.map(e => `<p>${e}</p>`).join('')}</p>
+                            <div class="actors-container">
+                                ${movie.Actors.map(e => `<span>${e}</span>`).join('')}
+                            </div>
                         <h2>Ratings</h2>
                             <p>Metascore: ${movie.Metascore}</p>
                             <p>IMDb: ${movie.imdbRating}</p>
-                        <hr>
                         `;
 
                         bodyElement.append(movieObject);
